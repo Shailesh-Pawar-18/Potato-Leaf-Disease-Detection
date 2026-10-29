@@ -1,79 +1,67 @@
-🌱 Potato Leaf Disease Detection using Deep Learning
-________________________________________________________
+# 🥔 Potato Leaf Disease Detection
 
-📌 Overview
+A deep learning project that classifies potato leaf images into three classes using a CNN built with TensorFlow/Keras, with a Streamlit web app for predictions.
 
-This project is an AI-powered system that detects potato leaf diseases using Convolutional Neural Networks (CNNs). The model classifies leaves into three categories:
+| Class | Description |
+|---|---|
+| `Potato___Early_blight` | Caused by *Alternaria solani* |
+| `Potato___Late_blight` | Caused by *Phytophthora infestans* |
+| `Potato___healthy` | No disease detected |
 
-✅ Healthy
+## Project Structure
 
-🛑 Early Blight
+```
+Potato_leaf_disease_Detection/
+├── Dataset/          # Train / Valid / Test images (not included in repo)
+├── Model/
+│   └── train_potato_disease.ipynb   # model training notebook
+├── Ui/
+│   ├── app.py        # Streamlit web app
+│   └── diseases.jpg  # banner image
+├── requirements.txt
+└── README.md
+```
 
-⚠️ Late Blight
+## Dataset
 
-A Streamlit web application is provided for easy access, allowing users to upload leaf images and receive instant predictions.
-________________________________________________________
-🚀 Features
+The dataset is not included because of its size. Download the potato leaf images (PlantVillage potato subset, e.g. from Kaggle) and arrange them as:
 
-Deep Learning Based: Uses a CNN model trained on plant disease datasets.
+```
+Dataset/
+├── Train/  (Potato___Early_blight, Potato___Late_blight, Potato___healthy)
+├── Valid/  (same 3 folders)
+└── Test/   (same 3 folders)
+```
 
-Real-Time Image Classification: Upload a leaf image and get instant predictions.
+## Model
 
-User-Friendly Web App: Built using Streamlit for a simple and interactive experience.
+- Input: 128 × 128 RGB images
+- Architecture: Conv2D (32) → Conv2D (32) → MaxPooling → Dropout → Dense (512) → Dropout → Softmax (3 classes)
+- Optimizer: Adam (lr = 0.0001), loss: categorical crossentropy, 10 epochs
+- Accuracy:  Training accuracy 99.22%, Validation accuracy 90.67%, Test accuracy 93.00%
 
-Optimized for CPU Inference: Runs efficiently without requiring a high-end GPU.
-________________________________________________________
-🛠️ Tech Stack
+The trained model (`trained_plant_disease_model.keras`, ~744 MB) is too large for GitHub. The app **downloads it automatically from Google Drive** the first time it runs.
 
-Programming Language: Python
+## Run Locally
 
-Libraries: TensorFlow, Keras, OpenCV, NumPy, Pillow
-
-Web Framework: Streamlit
-
-Deployment: Streamlit Cloud
-________________________________________________________
-🎯 How to Use
-
-1️⃣ Clone the Repository
-
-git clone https://github.com/Shailesh8669/Potato-Leaf-Disease-Detection
-
-cd potato-leaf-disease-detection
-
-2️⃣ Install Dependencies
-
+```bash
+git clone(https://github.com/Shailesh-Pawar-18/Potato-Leaf-Disease-Detection)
 pip install -r requirements.txt
+streamlit run Ui/app.py
+```
 
-3️⃣ Run the Web App
+Open the link shown in the terminal (usually http://localhost:8501), go to **Disease Recognition**, upload a leaf image and click **Predict**.
 
-streamlit run app.py
+## Retrain the Model
 
-4️⃣ Upload an Image
+1. Place the dataset in `Dataset/` as shown above.
+2. Open `Model/train_potato_disease.ipynb` in Jupyter and run all cells.
+3. The new model is saved as `Model/trained_plant_disease_model.keras`.
 
-Click Choose an Image and select a potato leaf image.
+## Tech Stack
 
-Press Predict to get the disease classification.
-________________________________________________________
-📈 Model Performance
+Python, TensorFlow/Keras, Streamlit, NumPy, Pillow
 
-Training Accuracy: 95%
+## Author
 
-Validation Accuracy: 92%
-
-Test Accuracy: 90%
-
-The model was trained on a dataset containing thousands of potato leaf images. Performance may vary based on real-world conditions.
-________________________________________________________
-🤝 Contribution
-
-Contributions are welcome! If you'd like to improve the project, feel free to fork the repo and submit pull requests.
-________________________________________________________
-📄 License
-
-This project is open-source and available under the MIT License.
-________________________________________________________
-📬 Contact
-
-For questions or collaborations, reach out to me via GitHub Issues.
-________________________________________________________
+Shailesh Pawar — Data Science internship project
