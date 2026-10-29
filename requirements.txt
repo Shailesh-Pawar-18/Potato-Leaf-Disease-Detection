@@ -6,3 +6,5 @@ matplotlib
 gdown
 numpy
 pillow
+streamlit
+tensorflow-cpu
